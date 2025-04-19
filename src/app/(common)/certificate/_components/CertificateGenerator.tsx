@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Award, BookOpen, Clock } from "lucide-react";
+import Image from 'next/image';
 
 interface CertificateProps {
   studentName: string;
@@ -41,7 +42,7 @@ const Certificate: React.FC<CertificateProps> = ({
   useEffect(() => {
     const loadImage = (src: string) => {
       return new Promise((resolve, reject) => {
-        const img = new Image();
+        const img = document.createElement('img');
         img.onload = () => resolve(img);
         img.onerror = reject;
         img.src = src;
@@ -158,19 +159,21 @@ const Certificate: React.FC<CertificateProps> = ({
             </div>
             <div className="flex justify-between items-baseline mb-10">
               <div>
-                <img
+                // Fix the Image component implementation
+                <Image 
                   src={instructorSignature}
                   alt="Instructor Signature"
+                  width={128}
+                  height={48}
                   className="w-32 mx-auto mb-2"
                 />
-                <div className="w-48 border-t-2 border-black mx-auto"></div>
-                <p className="mt-2 font-bold text-black">{instructorName}</p>
-                <p>Course Instructor</p>
-              </div>
-              <div>
-                <img
+                
+                // Also replace the second img tag
+                <Image
                   src={directorSignature}
                   alt="Director Signature"
+                  width={128}
+                  height={48}
                   className="w-32 mx-auto mb-2"
                 />
                 <div className="w-48 border-t-2 border-black mx-auto"></div>
